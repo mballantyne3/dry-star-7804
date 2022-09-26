@@ -1,0 +1,10 @@
+<h1>Welcome to <%= @hospital.name %></h1>
+
+<h3>Meet Our Doctors</h3>
+<ul>
+<% @hospital.doctors.each do |doctor| %>
+<li id="doctors-<%= doctor.id %>">
+  <%= doctor.name %>
+</li>
+<% end %>
+</ul>
