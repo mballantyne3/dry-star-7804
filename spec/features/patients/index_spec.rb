@@ -16,5 +16,6 @@ RSpec.describe 'patient index page' do
     second = find("#patient-#{@mary.id}")
 
     expect(first).to appear_before(second)
+    expect(page).to_not have_content(@pippin.name)
   end
 end
