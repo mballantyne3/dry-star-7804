@@ -5,6 +5,7 @@ RSpec.describe 'doctors show page' do
     @seattle_grace = Hospital.create!(name: "Seattle Grace")
     @melodyMD = @seattle_grace.doctors.create!(name: "Melody", specialty: "Surgery", university: "University of Southern California")
     @mary = @melodyMD.patients.create!(name: "Mary", age: 30)
+    @mackinley = @melodyMD.patients.create!(name: "MacKinley", age: 30)
 
     visit "/doctor/#{@melodyMD.id}"
   end
@@ -13,5 +14,18 @@ RSpec.describe 'doctors show page' do
     expect(page).to have_content("Welcome #{@melodyMD.name}")
     expect(page).to have_content("Specialty: Surgery")
     expect(page).to have_content("University Attended: University of Southern California")
+  end
+
+  it 'shows the name of the hospital where this doctor works' do
+    expect(page).to have_content("Hospital Currently Employed At: Seattle Grace")
+  end
+
+  it 'shows a list of all patients assigned to this doctor' do
+    within("#patient-#{@mary.id}") do
+      expect(page).to have_content("#{@mary.name}")
+    end
+    within("#patient-#{@mackinley.id}") do
+      expect(page).to have_content("#{@mackinley.name}")
+    end
   end
 end
