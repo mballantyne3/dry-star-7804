@@ -1,0 +1,7 @@
+<h1>Patient Index</h1>
+
+<% @patients.each do |patient| %>
+  <div id="patient-<%= patient.id %>">
+     <%= patient.name %>
+  </div>
+<% end %>
